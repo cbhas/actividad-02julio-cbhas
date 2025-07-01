@@ -1,12 +1,18 @@
-<h2>Crear Número Telefónico</h3>
+{% extends "master.html" %}
 
+{% block title %}
+Crear Número Telefónico
+{% endblock %}
+
+{% block content %}
 <form action="" method="post">
 
-  {% csrf_token %}
+    {% csrf_token %}
 
-  {{formulario.as_p}}
+    {{formulario.as_p}}
 
-  <p><input type='submit' value='Agregar'/></p>
+    <p><input type='submit' value='Agregar'/></p>
 </form>
 
 [<a href="{% url 'index' %}">inicio</a>]
+{% endblock %}
