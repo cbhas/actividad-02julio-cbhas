@@ -137,11 +137,8 @@ def crear_numero_telefonico_estudiante(request, id):
 
 def listar_todos_los_numeros_telefonicos(request):
     """
-    Vista para listar todos los números telefónicos registrados
     """
     numeros = NumeroTelefonico.objects.select_related('estudiante').all()
-    contexto = {
-        'numeros_telefonicos': numeros,
-        'total': numeros.count()
-    }
-    return render(request, 'obtenerNumerosTelefonicosEstudiante.html', contexto)
+    diccionario = {'numeros_telefonicos': numeros, 'total': len(numeros)}
+    
+    return render(request, 'obtenerNumerosTelefonicosEstudiante.html', diccionario)

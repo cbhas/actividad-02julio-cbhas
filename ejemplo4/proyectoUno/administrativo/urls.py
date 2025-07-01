@@ -26,7 +26,7 @@ urlpatterns = [
             views.crear_numero_telefonico_estudiante, 
             name='crear_numero_telefonico_estudiante'),
         path('listar/numeros/telefonicos/',
-    views.listar_todos_los_numeros_telefonicos,
-    name='listar_todos_numeros_telefonicos'),
+            views.listar_todos_los_numeros_telefonicos,
+            name='listar_todos_numeros_telefonicos'),
 
  ]
