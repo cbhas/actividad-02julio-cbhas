@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import RequestContext
-from django.shortcuts import render
-
-# importar las clases de models.py
-from administrativo.models import Matricula, Estudiante
+from administrativo.models import Matricula, Estudiante, Modulo
 from administrativo.forms import MatriculaForm, MatriculaEditForm
 
 # vista que permita presesentar las matriculas
@@ -14,7 +11,6 @@ def index(request):
     """
     """
     matriculas = Matricula.objects.all()
-
     titulo = "Listado de matriculas"
     informacion_template = {'matriculas': matriculas,
     'numero_matriculas': len(matriculas), 'mititulo': titulo}
@@ -23,9 +19,7 @@ def index(request):
 
 def detalle_matricula(request, id):
     """
-
     """
-
     matricula = Matricula.objects.get(pk=id)
     informacion_template = {'matricula': matricula}
     return render(request, 'detalle_matricula.html', informacion_template)
@@ -67,12 +61,22 @@ def editar_matricula(request, id):
 
 def detalle_estudiante(request, id):
     """
-
     """
-
     estudiante = Estudiante.objects.get(pk=id)
-    informacion_template = {'e': estudiante}
-    return render(request, 'detalle_estudiante.html', informacion_template)
+    total = estudiante.costo_total_matriculas()
+    diccionario = {'estduiante': estudiante, 'costo_total': total}
+    return render(request, 'detalle_estudiante.html', diccionario)
+
+def ver_modulos(request):
+    modulos = Modulo.objects.all()
+    datos = []
+    for modulo in modulos:
+        total = sum(m.costo for m in modulo.lasmatriculas.all())
+        datos.append({
+            'modulo': modulo,
+            'total_matriculas': total,
+        })
+    return render(request, 'ver_modulos.html', {'datos': datos})
 
 # ver los módulos
 #    nombre del módulp
