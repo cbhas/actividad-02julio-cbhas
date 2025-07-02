@@ -59,9 +59,8 @@ class Matricula(models.Model):
     modulo = models.ForeignKey(Modulo, related_name='lasmatriculas',
             on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
-
-    # Agregar costo
-
+    costo = models.DecimalField("Costo de matrícula", max_digits=6, decimal_places=2)
+    
     def __str__(self):
         return "Matricula: Estudiante(%s) - Modulo(%s)" % \
                 (self.estudiante, self.modulo.nombre)

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import RequestContext
 from administrativo.models import Matricula, Estudiante, Modulo
 from administrativo.forms import MatriculaForm, MatriculaEditForm
+from administrativo.forms import EstudianteForm, ModuloForm
 
 # vista que permita presesentar las matriculas
 # el nombre de la vista es index.
@@ -72,11 +73,30 @@ def ver_modulos(request):
     datos = []
     for modulo in modulos:
         total = sum(m.costo for m in modulo.lasmatriculas.all())
-        datos.append({
-            'modulo': modulo,
-            'total_matriculas': total,
-        })
-    return render(request, 'ver_modulos.html', {'datos': datos})
+        datos.append({'modulo': modulo, 'total_matriculas': total,})
+        diccionario = {'datos': datos}
+    return render(request, 'ver_modulos.html', diccionario)
+
+def crear_modulo(request):
+    if request.method == 'POST':
+        form = ModuloForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(ver_modulos)
+    else:
+        form = ModuloForm()
+    return render(request, 'crear_modulo.html', {'formulario': form})
+
+def crear_estudiante(request):
+    if request.method == 'POST':
+        form = EstudianteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(index)
+    else:
+        form = EstudianteForm()
+    return render(request, 'crear_estudiante.html', {'formulario': form})
+
 
 # ver los módulos
 #    nombre del módulp
