@@ -1,35 +1,64 @@
-<h1>{{mititulo}}</h1>
-<hr>
-<h3>Número de Matriculas {{ numero_matriculas }}</h3>
-<hr>
-[<a href="{% url 'crear_matricula' %}">nuevo</a>]
-<hr>
-<table border="1px">
-  <tr>
-    <th><b>Estudiante</b></th>
-    <th><b>Módulo</b></th>
-    <th><b>Comentario</b></th>
-    <th><b>Opciones</b></th>
-  </tr>
-  {% for e in matriculas %}
-  <tr>
-    <td>
-      {{e.estudiante.nombre}} <br>
-      {{e.estudiante.get_tipo_estudiante_display }}
-      [<a href="{% url 'detalle_estudiante' e.estudiante.id %}">+</a>]
-    </td>
-    <td>
-      {{e.modulo.nombre}}
-    </td>
-    <td>
-      {{e.comentario}}
-    </td>
-    <td>
-      [<a href="{% url 'detalle_matricula' e.id %}">ver</a>]
-      [<a href="{% url 'editar_matricula' e.id %}">editar</a>]
-    </td>
-  </tr>
-  {% endfor %}
+{% extends "master.html" %}
 
-</table>
-<hr>
+{% block title %}
+Página Principal
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <h1 class="text-white text-center">Bienvenido a Mi App</h1>
+                <h6 class="text-center">Gestión de Matrículas y Estudiantes</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="explore-section section-padding" id="section_2">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">{{ mititulo }}</h2>
+                <p><b>Número de matrículas registradas: {{ numero_matriculas }}</b></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table id="matriculasTable" class="display">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Módulo</th>
+                            <th>Costo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for matricula in matriculas %}
+                        <tr>
+                            <td>{{ matricula.estudiante.nombres }} {{ matricula.estudiante.apellidos }}</td>
+                            <td>{{ matricula.modulo.nombre }}</td>
+                            <td>${{ matricula.costo }}</td>
+                            <td>
+                                <a href="#" class="btn btn-info btn-sm">Ver Detalles</a>
+                                <a href="{% url 'editar_matricula' matricula.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    $('#matriculasTable').DataTable();
+});
+</script>
+{% endblock %}
