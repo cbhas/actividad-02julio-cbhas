@@ -26,7 +26,7 @@ Página Principal
         </div>
         <div class="row">
             <div class="col-12">
-                <table id="matriculasTable" class="display">
+                <table id="matriculasTable" class="display table table-striped">
                     <thead>
                         <tr>
                             <th>Estudiante</th>
@@ -38,11 +38,11 @@ Página Principal
                     <tbody>
                         {% for matricula in matriculas %}
                         <tr>
-                            <td>{{ matricula.estudiante.nombres }} {{ matricula.estudiante.apellidos }}</td>
+                            <td>{{ matricula.estudiante.nombre }} {{ matricula.estudiante.apellido }}</td>
                             <td>{{ matricula.modulo.nombre }}</td>
                             <td>${{ matricula.costo }}</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-sm">Ver Detalles</a>
+                                <a href="{% url 'detalle_matricula' matricula.id %}" class="btn btn-info btn-sm">Ver Detalles</a>
                                 <a href="{% url 'editar_matricula' matricula.id %}" class="btn btn-warning btn-sm">Editar</a>
                             </td>
                         </tr>
@@ -57,8 +57,17 @@ Página Principal
 
 {% block extra_js %}
 <script>
-$(document).ready(function() {
-    $('#matriculasTable').DataTable();
-});
+    $(document).ready(function () {
+        $('#matriculasTable').DataTable({
+            "language": {
+                "search": "Buscar:",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)"
+            }
+        });
+    });
 </script>
 {% endblock %}
