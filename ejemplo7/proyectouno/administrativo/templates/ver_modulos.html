@@ -1,0 +1,20 @@
+<h3>Ver Modulos</h3>
+<p>
+    <b>Modulo:</b> {{ modulo.nombre }}
+</p>
+<p>
+    <b>Numero de estudiantes:</b> {{ numero_estudiantes }}
+</p>
+<p>
+    <b>Listado de estudiantes:</b>  
+    <ul>
+        {% for estudiante in estudiantes %}
+            <li>{{ estudiante.nombre }} {{ estudiante.apellido }}</li>
+        {% empty %}
+            <li>No hay estudiantes matriculados en este modulo.</li>
+        {% endfor %}
+    </ul>
+</p>
+<p>
+    [<a href="{% url 'index' %}">Inicio</a>]
+</p>
