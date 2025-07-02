@@ -1,20 +1,39 @@
-<h3>Ver estudiante</h3>
-<p>
-    <b>Modulo:</b> {{ modulo.nombre }}
-</p>
-<p>
-    <b>Numero de estudiantes:</b> {{ numero_estudiantes }}
-</p>
-<p>
-    <b>Listado de estudiantes:</b>  
-    <ul>
-        {% for estudiante in estudiantes %}
-            <li>{{ estudiante.nombre }} {{ estudiante.apellido }}</li>
-        {% empty %}
-            <li>No hay estudiantes matriculados en este modulo.</li>
-        {% endfor %}
-    </ul>
-</p>    
-<p>
-    [<a href="{% url 'index' %}">Inicio</a>]
-</p>
+{% extends 'master.html' %}
+
+{% block title %}
+Ver Estudiantes del Módulo
+{% endblock %}
+
+{% block content %}
+<section class="section-padding section-bg">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-lg-8">
+        <div class="custom-block p-5">
+          <h2 class="mb-4 text-center">Estudiantes del Módulo</h2>
+
+          <p><strong>Módulo:</strong> {{ modulo.nombre }}</p>
+          <p><strong>Número de estudiantes:</strong> {{ numero_estudiantes }}</p>
+
+          <hr>
+
+          <h4 class="mt-4">Listado de estudiantes:</h4>
+          <ul class="ps-3">
+            {% for estudiante in estudiantes %}
+              <li>{{ estudiante.nombre }} {{ estudiante.apellido }}</li>
+            {% empty %}
+              <li>No hay estudiantes matriculados en este módulo.</li>
+            {% endfor %}
+          </ul>
+
+          <div class="text-center mt-4">
+            <a href="{% url 'index' %}" class="btn btn-link">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

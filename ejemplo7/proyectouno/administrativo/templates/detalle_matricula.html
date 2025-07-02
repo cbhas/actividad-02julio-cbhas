@@ -1,10 +1,30 @@
+{% extends 'master.html' %}
 
+{% block title %}
+Detalle Matrícula
+{% endblock %}
 
-<h3>Detalle de Matricula</h3>
+{% block content %}
+<section class="section-padding section-bg">
+  <div class="container">
+    <div class="row justify-content-center">
 
-<b>Nombre:</b> {{matricula.estudiante}}
-</br>
-<b>Modulo:</b> {{matricula.modulo}}
+      <div class="col-lg-8">
+        <div class="custom-block p-5">
+          <h2 class="mb-4 text-center">Detalle de Matrícula</h2>
 
-</br>
-[<a href="{% url 'index' %}">inicio</a>]
+          <p><strong>Estudiante:</strong> {{ m.estudiante.nombre }} {{ m.estudiante.apellido }}</p>
+          <p><strong>Módulo:</strong> {{ m.modulo.nombre }}</p>
+          <p><strong>Comentario:</strong> {{ m.comentario }}</p>
+          <p><strong>Costo:</strong> ${{ m.costo }}</p>
+
+          <div class="text-center mt-4">
+            <a href="{% url 'index' %}" class="btn btn-link">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

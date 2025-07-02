@@ -1,33 +1,56 @@
-<h2>Detalle estudiante</h2>
+{% extends 'master.html' %}
 
-<b>Nombre:</b> {{e.nombre}}
-</br>
-<b>Apellido:</b> {{e.apellido}}
-</br>
-<b>Edad:</b> {{e.edad}}
-</br>
-<b>Cédula:</b> {{e.cedula}}
-</br>
-<hr>
-<table border="1px">
-  <tr>
-    <th><b>Módulo</b></th>
-    <th><b>comentario</b></th>
+{% block title %}
+Detalle del Estudiante
+{% endblock %}
 
-  </tr>
-  {% for m in e.obtener_matriculas %}
-  <tr>
-    <td>
-      {{m.modulo.nombre}}
-    </td>
-    <td>
-      {{m.comentario}}
-    </td>
+{% block content %}
+<section class="section-padding section-bg">
+  <div class="container">
+    <div class="row justify-content-center">
 
-  </tr>
-  {% endfor %}
+      <div class="col-lg-8">
+        <div class="custom-block p-5">
+          <h2 class="mb-4 text-center">Detalle del Estudiante</h2>
 
-</table>
+          <p><strong>Nombre:</strong> {{ e.nombre }}</p>
+          <p><strong>Apellido:</strong> {{ e.apellido }}</p>
+          <p><strong>Edad:</strong> {{ e.edad }}</p>
+          <p><strong>Cédula:</strong> {{ e.cedula }}</p>
 
-</br>
-[<a href="{% url 'index' %}">inicio</a>]
+          <hr>
+
+          <h4 class="mt-4 mb-3">Matrículas</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Módulo</th>
+                  <th>Comentario</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for m in e.obtener_matriculas %}
+                  <tr>
+                    <td>{{ m.modulo.nombre }}</td>
+                    <td>{{ m.comentario }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="2">No hay matrículas registradas.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="text-center mt-4">
+            <a href="{% url 'index' %}" class="btn btn-link">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
