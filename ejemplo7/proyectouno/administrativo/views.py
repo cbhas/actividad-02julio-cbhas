@@ -74,7 +74,7 @@ def ver_modulos(request):
     for modulo in modulos:
         total = sum(m.costo for m in modulo.lasmatriculas.all())
         datos.append({'modulo': modulo, 'total_matriculas': total,})
-        diccionario = {'datos': datos}
+    diccionario = {'datos': datos}    
     return render(request, 'ver_modulos.html', diccionario)
 
 def crear_modulo(request):
@@ -85,7 +85,8 @@ def crear_modulo(request):
             return redirect(ver_modulos)
     else:
         form = ModuloForm()
-    return render(request, 'crear_modulo.html', {'formulario': form})
+    diccionario = {'formulario': form}
+    return render(request, 'crear_modulo.html', diccionario)
 
 def crear_estudiante(request):
     if request.method == 'POST':
@@ -95,7 +96,8 @@ def crear_estudiante(request):
             return redirect(index)
     else:
         form = EstudianteForm()
-    return render(request, 'crear_estudiante.html', {'formulario': form})
+    diccionario = {'formulario': form}
+    return render(request, 'crear_estudiante.html', diccionario)
 
 
 # ver los módulos
