@@ -19,8 +19,6 @@ Ver Módulos
                 <thead>
                   <tr>
                     <th>Nombre del Módulo</th>
-                    <th>Créditos</th>
-                    <th>Costo Base</th>
                     <th>Total de Matrículas</th>
                   </tr>
                 </thead>
@@ -28,8 +26,6 @@ Ver Módulos
                   {% for item in datos %}
                     <tr>
                       <td>{{ item.modulo.nombre }}</td>
-                      <td>{{ item.modulo.creditos }}</td>
-                      <td>${{ item.modulo.costo }}</td>
                       <td>${{ item.total_matriculas }}</td>
                     </tr>
                   {% endfor %}

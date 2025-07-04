@@ -9,17 +9,32 @@ Detalle Matrícula
   <div class="container">
     <div class="row justify-content-center">
 
-      <div class="col-lg-8">
-        <div class="custom-block p-5">
-          <h2 class="mb-4 text-center">Detalle de Matrícula</h2>
+      <div class="col-lg-8 col-md-10">
+        <div class="custom-block bg-white p-5 shadow-lg">
+          <h2 class="text-center mb-5 text-primary">Detalle de Matrícula</h2>
 
-          <p><strong>Estudiante:</strong> {{ m.estudiante.nombre }} {{ m.estudiante.apellido }}</p>
-          <p><strong>Módulo:</strong> {{ m.modulo.nombre }}</p>
-          <p><strong>Comentario:</strong> {{ m.comentario }}</p>
-          <p><strong>Costo:</strong> ${{ m.costo }}</p>
+          <div class="mb-4">
+            <h5 class="text-dark mb-1">Estudiante</h5>
+            <p>{{ matricula.estudiante.nombre }} {{ matricula.estudiante.apellido }}</p>
+          </div>
 
-          <div class="text-center mt-4">
-            <a href="{% url 'index' %}" class="btn btn-link">Volver al inicio</a>
+          <div class="mb-4">
+            <h5 class="text-dark mb-1">Módulo</h5>
+            <p>{{ matricula.modulo.nombre }}</p>
+          </div>
+
+          <div class="mb-4">
+            <h5 class="text-dark mb-1">Comentario</h5>
+            <p>{{ matricula.comentario }}</p>
+          </div>
+
+          <div class="mb-4">
+            <h5 class="text-dark mb-1">Costo</h5>
+            <p>${{ matricula.costo }}</p>
+          </div>
+
+          <div class="text-center mt-5">
+            <a href="{% url 'index' %}" class="custom-btn">Volver al inicio</a>
           </div>
         </div>
       </div>
