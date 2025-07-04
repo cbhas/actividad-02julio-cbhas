@@ -4,7 +4,7 @@ from administrativo.models import Estudiante, Modulo, Matricula
 class EstudianteForm(forms.ModelForm):
     class Meta:
         model = Estudiante
-        fields = '__all__'
+        fields = ['nombre', 'apellido', 'cedula', 'edad', 'tipo_estudiante']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control'}),
@@ -24,7 +24,7 @@ class ModuloForm(forms.ModelForm):
 class MatriculaForm(forms.ModelForm):
     class Meta:
         model = Matricula
-        fields = '__all__'
+        fields = ['estudiante', 'modulo', 'comentario', 'costo']
         widgets = {
             'estudiante': forms.Select(attrs={'class': 'form-control'}),
             'modulo': forms.Select(attrs={'class': 'form-control'}),
@@ -35,4 +35,4 @@ class MatriculaForm(forms.ModelForm):
 class MatriculaEditForm(forms.ModelForm):
     class Meta:
         model = Matricula
-        fields = ['comentario', 'costo']
+        fields = ['estudiante', 'modulo', 'comentario', 'costo']

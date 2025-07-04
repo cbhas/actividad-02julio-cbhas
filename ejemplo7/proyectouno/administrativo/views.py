@@ -65,7 +65,7 @@ def detalle_estudiante(request, id):
     """
     estudiante = Estudiante.objects.get(pk=id)
     total = estudiante.costo_total_matriculas()
-    diccionario = {'estduiante': estudiante, 'costo_total': total}
+    diccionario = {'estudiante': estudiante, 'costo_total': total}
     return render(request, 'detalle_estudiante.html', diccionario)
 
 def ver_modulos(request):
@@ -98,6 +98,24 @@ def crear_estudiante(request):
         form = EstudianteForm()
     diccionario = {'formulario': form}
     return render(request, 'crear_estudiante.html', diccionario)
+
+
+def ver_estudiantes(request):
+    estudiantes = Estudiante.objects.all()
+    datos = []
+    for est in estudiantes:
+        datos.append({
+            'nombre': est.nombre,
+            'apellido': est.apellido,
+            'cedula': est.cedula,
+            'edad': est.edad,
+            'tipo_estudiante': est.tipo_estudiante,
+            'costo_total': est.costo_total_matriculas(),
+        })
+    diccionario = {'datos': datos}
+    return render(request, 'ver_estudiantes.html', diccionario)
+
+
 
 
 # ver los módulos

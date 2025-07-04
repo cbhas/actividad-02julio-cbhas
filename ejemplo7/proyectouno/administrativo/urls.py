@@ -12,4 +12,5 @@ urlpatterns = [
     path('detalle-matricula/<int:id>/', views.detalle_matricula, name='detalle_matricula'),
     path('crear-matricula/', views.crear_matricula, name='crear_matricula'),
     path('editar-matricula/<int:id>/', views.editar_matricula, name='editar_matricula'),
+    path('ver-estudiantes/', views.ver_estudiantes, name='ver_estudiantes'),
 ]
